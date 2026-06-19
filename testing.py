@@ -5,7 +5,7 @@ from RR import round_robin
 from SJF import sjf
 from SRTF import srtf
 from nonPreEmptivePriority import nonPreEmptivePriority
-import preEmptivePriority
+from preEmptivePriority import preEmptivePriority
 
 def make_tasks():
     """Recreate tasks fresh for each test since Task mutates state."""
