@@ -13,7 +13,7 @@ def make_tasks():
         Task("P1", lambda: None, arrival_time=0, burst_time=6, priority=3, queue=0),
         Task("P2", lambda: None, arrival_time=2, burst_time=4, priority=1, queue=1),
         Task("P3", lambda: None, arrival_time=4, burst_time=2, priority=2, queue=0),
-        Task("P4", lambda: None, arrival_time=6, burst_time=1, priority=4, queue=2),
+        Task("P4", lambda: None, arrival_time=6, burst_time=1, priority=4, queue=1),
     ]
 
 def print_results(tasks, algorithm_name):
