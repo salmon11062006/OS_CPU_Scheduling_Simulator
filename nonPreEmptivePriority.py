@@ -1,5 +1,3 @@
-from Helper import Task
-
 def nonPreEmptivePriority(tasks):
     tasks.sort(key=lambda x: x.arrival_time)
     current_time = 0

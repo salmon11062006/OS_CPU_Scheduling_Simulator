@@ -1,14 +1,19 @@
+from FCFS import fcfs
 from Helper import Task
-from SJF import sjf_scheduler
-from SRTF import srtf_scheduler
+from MLQ import mlq
+from RR import round_robin
+from SJF import sjf
+from SRTF import srtf
+from nonPreEmptivePriority import nonPreEmptivePriority
+import preEmptivePriority
 
 def make_tasks():
     """Recreate tasks fresh for each test since Task mutates state."""
     return [
-        Task("P1", lambda: None, arrival_time=0, burst_time=6, priority=3),
-        Task("P2", lambda: None, arrival_time=2, burst_time=4, priority=1),
-        Task("P3", lambda: None, arrival_time=4, burst_time=2, priority=2),
-        Task("P4", lambda: None, arrival_time=6, burst_time=1, priority=4),
+        Task("P1", lambda: None, arrival_time=0, burst_time=6, priority=3, queue=0),
+        Task("P2", lambda: None, arrival_time=2, burst_time=4, priority=1, queue=1),
+        Task("P3", lambda: None, arrival_time=4, burst_time=2, priority=2, queue=0),
+        Task("P4", lambda: None, arrival_time=6, burst_time=1, priority=4, queue=2),
     ]
 
 def print_results(tasks, algorithm_name):
@@ -30,15 +35,45 @@ def print_results(tasks, algorithm_name):
     print("-" * 40)
     print(f"{'Avg':<8} {'':<10} {'':<8} {'':<10} {total_tat/n:<8.2f} {total_wt/n:<8.2f}")
 
+def test_fcfs():
+    tasks = make_tasks()
+    fcfs(tasks)
+    print_results(tasks, "FCFS")
+
 def test_sjf():
     tasks = make_tasks()
-    sjf_scheduler(tasks)
+    sjf(tasks)
     print_results(tasks, "SJF")
+
+def test_rr():
+    tasks = make_tasks()
+    round_robin(tasks, quantum=2)
+    print_results(tasks, "Round Robin (Quantum=2)")
 
 def test_srtf():
     tasks = make_tasks()
-    srtf_scheduler(tasks)
+    srtf(tasks)
     print_results(tasks, "SRTF")
 
+def test_nonprepriority():
+    tasks = make_tasks()
+    nonPreEmptivePriority(tasks)
+    print_results(tasks, "Non-Preemptive Priority")
+
+def test_prepriority():
+    tasks = make_tasks()
+    preEmptivePriority(tasks)
+    print_results(tasks, "Preemptive Priority")
+
+def test_mlq():
+    tasks = make_tasks()
+    mlq(tasks, quantum=2)
+    print_results(tasks, "Multi-Level Queue (Quantum=2)")
+
+test_fcfs()
 test_sjf()
 test_srtf()
+test_rr()
+test_nonprepriority()
+test_prepriority()
+test_mlq()

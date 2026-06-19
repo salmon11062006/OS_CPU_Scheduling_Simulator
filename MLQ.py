@@ -1,5 +1,4 @@
 from collections import deque
-from Helper import Task
 
 def mlq(tasks, quantum=2):
     tasks.sort(key=lambda x: x.arrival_time)

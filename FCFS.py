@@ -1,5 +1,3 @@
-from Helper import Task
-
 def fcfs(tasks):
     # Sort tasks by arrival time
     tasks.sort(key=lambda x: x.arrival_time)
