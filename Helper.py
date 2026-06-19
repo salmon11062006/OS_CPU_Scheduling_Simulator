@@ -20,7 +20,7 @@ class Task:
     def turnaround_time(self):
         if not self.completed:
             raise Exception("Task not Completed")
-        if not self.completion_time:
+        if self.completion_time is None:
             raise Exception("Completion Time is None")
         return self.completion_time - self.arrival_time
 
