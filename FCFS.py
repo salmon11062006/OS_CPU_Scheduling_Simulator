@@ -19,19 +19,3 @@ def fcfs(tasks):
         task.completion_time = current_time
 
     return tasks
-
-
-# Example usage
-def example_task():
-    print("Executing task...")
-
-tasks = [
-    Task(name="Task 1", func=example_task, arrival_time=0, burst_time=5),
-    Task(name="Task 2", func=example_task, arrival_time=2, burst_time=3),
-    Task(name="Task 3", func=example_task, arrival_time=4, burst_time=1)
-]
-
-scheduled_tasks = fcfs(tasks)
-
-for task in scheduled_tasks:
-    print(f"{task.name}: Arrival Time={task.arrival_time}, Burst Time={task.burst_time}, Completion Time={task.completion_time}, Turnaround Time={task.turnaround_time()}, Waiting Time={task.waiting_time()}")

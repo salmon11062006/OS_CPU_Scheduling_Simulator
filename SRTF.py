@@ -1,26 +1,26 @@
 from Helper import Task
 
-def srtf_scheduler(tasks):
-    time = 0
-    remaining = tasks[:]
-    current = None
+def srtf(tasks):
+    tasks.sort(key=lambda x: x.arrival_time)
+    current_time = 0
+    completed_tasks = 0
+    n = len(tasks)
 
-    while remaining:
-        available = [t for t in remaining if t.arrival_time <= time]
+    while completed_tasks < n:
+        available_tasks = [task for task in tasks if task.arrival_time <= current_time and not task.completed]
 
-        if not available:
-            time += 1
+        if not available_tasks:
+            current_time = min(task.arrival_time for task in tasks if not task.completed)
             continue
 
-        # Always pick the task with the shortest *remaining* time
-        current = min(available, key=lambda t: t.remaining_time)
+        # pick the task with the shortest remaining time (preemptive)
+        task = min(available_tasks, key=lambda x: x.remaining_time)
 
-        # Execute ONE unit (preemptive - re-evaluate after each tick)
-        current.execute()
-        time += 1
+        task.execute()
+        current_time += 1
 
-        # If task is completed, remove it from the list
-        if current.completed:
-            current.completion_time = time
-            remaining.remove(current)
-    
+        if task.completed:
+            task.completion_time = current_time
+            completed_tasks += 1
+
+    return tasks
