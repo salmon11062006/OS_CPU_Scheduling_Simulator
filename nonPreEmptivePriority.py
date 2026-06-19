@@ -15,12 +15,12 @@ def preEmptivePriority(tasks):
 
         task = max(available_tasks, key=lambda x: x.priority)
 
-        task.execute()
-        current_time += 1
+        while not task.completed:
+            task.execute()
+            current_time += 1
 
-        if task.completed:
-            task.completion_time = current_time
-            completed_tasks += 1
+        task.completion_time = current_time
+        completed_tasks += 1
 
     return tasks
 
