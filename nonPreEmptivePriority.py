@@ -1,6 +1,6 @@
 from Helper import Task
 
-def preEmptivePriority(tasks):
+def nonPreEmptivePriority(tasks):
     tasks.sort(key=lambda x: x.arrival_time)
     current_time = 0
     completed_tasks = 0
@@ -23,17 +23,3 @@ def preEmptivePriority(tasks):
         completed_tasks += 1
 
     return tasks
-
-def example_task():
-    print("Executing task...")
-
-tasks = [
-    Task(name="Task 1", func=example_task, arrival_time=0, burst_time=5, priority=1),
-    Task(name="Task 2", func=example_task, arrival_time=2, burst_time=3, priority=2),
-    Task(name="Task 3", func=example_task, arrival_time=4, burst_time=1, priority=3)
-]
-
-scheduled_tasks = preEmptivePriority(tasks)
-
-for task in scheduled_tasks:
-    print(f"{task.name}: Arrival Time={task.arrival_time}, Burst Time={task.burst_time}, Completion Time={task.completion_time}, Turnaround Time={task.turnaround_time()}, Waiting Time={task.waiting_time()}")
