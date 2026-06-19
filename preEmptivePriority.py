@@ -11,7 +11,7 @@ def preEmptivePriority(tasks):
             current_time = min(task.arrival_time for task in tasks if not task.completed)
             continue
 
-        task = max(available_tasks, key=lambda x: x.priority)
+        task = min(available_tasks, key=lambda x: x.priority)
 
         task.execute()
         current_time += 1
